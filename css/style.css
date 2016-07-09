@@ -1,0 +1,12 @@
+html, body {
+	font-size: 15px !important;
+}
+
+.padding-top {
+	padding-top: 15px;
+}
+
+.breaker {
+	padding-top: 2.5vh;
+	padding-bottom: 2.5vh;
+}

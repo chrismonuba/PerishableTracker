@@ -7,9 +7,18 @@
 		
 		function __construct($username, $password, $name, $email) {
 			$this->username = $username;
-			$this->password = $password;
+			$this->password = md5($password);
 			$this->name = $name;
 			$this->email = $email;
+		}
+
+		function requiredFields() {
+			return array(
+					"username",
+					"password",
+					"name",
+					"email"
+				);
 		}
 	}
 ?>

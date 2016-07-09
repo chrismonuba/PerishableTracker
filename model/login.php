@@ -1,22 +1,19 @@
 <?php
 	$logRequired = false;
-    
-	require_once("helpers/general.php");
+
+	require_once("model-general.php");
 	
-	$notifier = new notifier("", "", "");
-	
-	
+	if(isLoggedIn()) {
+		goToDashboard();
+	}
+
 	if(isSubmit()) {
-		$sendData = isAllPostSet($loginDetails);
+		$loginDetails = new loginInfo(post('username'), post('password'));
+		$sendData = isAllPostSet($loginDetails->requiredFields(), $loginDetails);
 		if($sendData) {
-			$login = new loginInfo(post('username'), post('password'));
-			if(loginValid($login)) {
-				$notifier = new notifier(
-					"success", 
-					"Successfully logged in, redirecting you to main page.", 
-					true);
-				echo "<meta http-equiv='refresh' content='3;index.php'></meta>";
-				$_SESSION['username'] = $login->username;
+			if(loginValid($loginDetails)) {
+				$_SESSION['username'] = $loginDetails->username;
+				gotoDashboard();
 			} else {
 				$notifier = new notifier("danger", "Invalid login details.", true);
 			}

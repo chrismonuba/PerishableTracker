@@ -5,7 +5,14 @@
 		
 		function __construct($username, $password) {
 			$this->username = $username;
-			$this->password = $password;
+			$this->password = md5($password);
+		}
+
+		function requiredFields() {
+			return array(
+					"username",
+					"password"
+				);
 		}
 	}
 ?>
